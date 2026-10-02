@@ -1,0 +1,62 @@
+{
+  "headline": "Engineering a Sustainable Future.",
+  "bio": "Professional journey of Dikshant Dahiya. Bridging technical rigor in process safety engineering with high-fidelity ESG research and system audit standards.",
+  "linkedin": "https://linkedin.com",
+  "github": "https://github.com",
+  "youtube": "https://youtube.com",
+  "assets": [
+    {
+      "id": "Gemini_Generated_Image_xmrcjhxmrcjhxmrc_1790181170454_23589951.png",
+      "name": "Gemini_Generated_Image_xmrcjhxmrcjhxmrc.png",
+      "url": "/uploads/Gemini_Generated_Image_xmrcjhxmrcjhxmrc_1790181170454_23589951.png",
+      "size": "2.74 MB",
+      "type": "image/png",
+      "createdAt": "2026-09-23T16:32:50.474Z"
+    },
+    {
+      "id": "Gemini_Generated_Image_xmrcjhxmrcjhxmrc_1790181215335_66c1ed99.png",
+      "name": "Gemini_Generated_Image_xmrcjhxmrcjhxmrc.png",
+      "url": "/uploads/Gemini_Generated_Image_xmrcjhxmrcjhxmrc_1790181215335_66c1ed99.png",
+      "size": "2.74 MB",
+      "type": "image/png",
+      "createdAt": "2026-09-23T16:33:35.358Z"
+    },
+    {
+      "id": "Dikshant_Dahiya_Resume.pdf",
+      "name": "Dikshant Dahiya Resume.pdf",
+      "url": "/uploads/Dikshant_Dahiya_Resume.pdf",
+      "size": "81.37 KB",
+      "type": "application/pdf",
+      "createdAt": "2026-09-30T00:00:00.000Z"
+    },
+    {
+      "id": "esg-sustainability-forest.jpg",
+      "name": "ESG Sustainability Forest.jpg",
+      "url": "/uploads/esg-sustainability-forest.jpg",
+      "size": "62.06 KB",
+      "type": "image/jpeg",
+      "createdAt": "2026-09-30T00:00:00.000Z"
+    }
+  ],
+  "blocks": [
+    {
+      "id": "block_1",
+      "type": "text",
+      "value": "Welcome to my dynamic ESG & Stewardship Portfolio. This section renders elements loaded from locally stored content blocks.",
+      "sort_order": 10
+    },
+    {
+      "id": "block_2",
+      "type": "image",
+      "value": "/uploads/esg-sustainability-forest.jpg",
+      "name": "High-Fidelity Assurance Audits",
+      "sort_order": 20
+    },
+    {
+      "id": "block_3",
+      "type": "text",
+      "value": "My core methodology focuses on transferring manual checklists into highly automated audit models, cutting anomalies by 40%. Deploying standard frameworks (BRSR, ISO 14001, ISO 9001).",
+      "sort_order": 30
+    }
+  ]
+}
