@@ -4,18 +4,17 @@ import crypto from "crypto";
 import fs from "fs/promises";
 import dotenv from "dotenv";
 import nodemailer from "nodemailer";
+import { put, del } from "@vercel/blob";
 
 dotenv.config();
 
 const app = express();
 const dataDirectory = path.resolve(process.cwd(), "data");
-const uploadsDirectory = path.resolve(process.cwd(), "uploads");
 const portfolioFile = path.join(dataDirectory, "portfolio.json");
 const MAX_UPLOAD_BYTES = 45 * 1024 * 1024;
 
 app.use(express.json({ limit: "65mb" }));
 app.use(express.urlencoded({ limit: "65mb", extended: true }));
-app.use("/uploads", express.static(uploadsDirectory, { fallthrough: false, maxAge: "1h" }));
 
 const defaultPortfolio = {
   headline: "Engineering a Sustainable Future.",
@@ -26,8 +25,8 @@ const defaultPortfolio = {
   assets: [] as { id: string; name: string; url: string; size: string; type: string; createdAt: string }[],
   blocks: [
     { id: "block_1", type: "text", value: "Welcome to my dynamic ESG & Stewardship Portfolio. This section renders elements loaded from locally stored content blocks.", sort_order: 10 },
-    { id: "block_2", type: "image", value: "https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?auto=format&fit=crop&q=80&w=1200", name: "High-Fidelity Assurance Audits", sort_order: 20 },
-    { id: "block_3", type: "text", value: "My core methodology focuses on transferring manual checklists into highly automated audit models, cutting anomalies by 40%. Deploying standard frameworks (BRSR, ISO 14001, ISO 9001).", sort_order: 30 },
+    { id: "block_2", type: "image", value: "https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?auto=format&fit=crop&q=80&w=1200", name: "High-Fidelity Assurance Audits", sort_order: 20 }[...]
+    { id: "block_3", type: "text", value: "My core methodology focuses on transferring manual checklists into highly automated audit models, cutting anomalies by 40%. Deploying standard frameworks[...]
   ] as any[],
 };
 
@@ -35,7 +34,6 @@ type PortfolioDb = typeof defaultPortfolio;
 
 async function ensureLocalStorage() {
   await fs.mkdir(dataDirectory, { recursive: true });
-  await fs.mkdir(uploadsDirectory, { recursive: true });
   try {
     await fs.access(portfolioFile);
   } catch {
@@ -183,18 +181,19 @@ app.post("/api/upload", async (req, res) => {
     if (!buffer.length) return res.status(400).json({ error: "The selected file is empty or invalid" });
     if (buffer.length > MAX_UPLOAD_BYTES) return res.status(413).json({ error: "Files must be 45 MB or smaller" });
 
-    await ensureLocalStorage();
     const originalName = path.basename(filename).replace(/[\r\n]/g, "_");
     const extension = path.extname(originalName).slice(0, 16);
     const safeStem = path.basename(originalName, extension).normalize("NFKD").replace(/[^a-zA-Z0-9_-]/g, "_").slice(0, 80) || "file";
     const storedName = `${safeStem}_${Date.now()}_${crypto.randomBytes(4).toString("hex")}${extension}`;
-    await fs.writeFile(path.join(uploadsDirectory, storedName), buffer, { flag: "wx" });
+
+    // Upload to Vercel Blob
+    const blob = await put(storedName, buffer, { access: "public", contentType: mimeType });
 
     const currentDb = await readDb();
     const asset = {
       id: storedName,
       name: originalName,
-      url: `/uploads/${encodeURIComponent(storedName)}`,
+      url: blob.url,
       size: `${(buffer.length / 1024 / 1024).toFixed(2)} MB`,
       type: mimeType || "application/octet-stream",
       createdAt: new Date().toISOString(),
@@ -204,19 +203,7 @@ app.post("/api/upload", async (req, res) => {
     return res.json({ success: true, asset });
   } catch (err) {
     console.error("Upload error:", err);
-    return res.status(500).json({ error: "Failed to store uploaded file locally" });
-  }
-});
-
-app.get("/api/assets/:id", async (req, res) => {
-  try {
-    const data = await readDb();
-    const asset = data.assets.find((item) => item.id === req.params.id);
-    if (!asset) return res.status(404).json({ error: "Asset not found" });
-    return res.download(path.join(uploadsDirectory, asset.id), asset.name);
-  } catch (err) {
-    console.error("Error serving asset:", err);
-    return res.status(404).json({ error: "Asset not found" });
+    return res.status(500).json({ error: "Failed to upload file" });
   }
 });
 
@@ -228,7 +215,10 @@ app.delete("/api/assets", async (req, res) => {
     const currentDb = await readDb();
     const asset = currentDb.assets.find((item) => item.url === url);
     if (!asset) return res.status(404).json({ error: "Asset not found" });
-    await fs.rm(path.join(uploadsDirectory, asset.id), { force: true });
+    
+    // Delete from Vercel Blob
+    await del(url);
+    
     currentDb.assets = currentDb.assets.filter((item) => item.id !== asset.id);
     currentDb.blocks = currentDb.blocks.map((block) => block.value === asset.url ? { ...block, value: "" } : block);
     await writeDb(currentDb);
