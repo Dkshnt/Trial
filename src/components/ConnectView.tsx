@@ -9,7 +9,7 @@ interface ConnectViewProps {
 
 export default function ConnectView({ mode, portfolio }: ConnectViewProps) {
   const isProd = mode === 'professional';
-  const resume = portfolio.assets?.find((asset) => asset.url === '/uploads/Dikshant_Dahiya_Resume.pdf');
+  const resume = portfolio.assets?.find((asset) => asset.url === '/Dikshant_Dahiya_Resume.pdf');
 
   // Real-time IST Clock (Indian Standard Time - UTC+5:30)
   const [currentTime, setCurrentTime] = useState<string>('');
