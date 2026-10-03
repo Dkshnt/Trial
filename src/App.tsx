@@ -24,7 +24,7 @@ export default function App() {
 
   const fetchPortfolio = async () => {
     try {
-      const res = await fetch('/api/portfolio');
+      const res = await fetch('/portfolio.json');
       if (res.ok) {
         const data = await res.json();
         setPortfolio(data);
