@@ -20,7 +20,7 @@ export default function App() {
     github: "https://github.com/Dkshnt",
     youtube: "https://www.youtube.com/@uncovrdminds",
     resumeURL: "/Dikshant_Dahiya_Resume.pdf",
-    photo: "/esg-sustainability-forest.jpg"
+    photo: "/esg-sustainability-forest.jpg",
     blocks: [
       {
         id: "block_2",
