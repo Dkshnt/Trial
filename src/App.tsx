@@ -18,7 +18,8 @@ export default function App() {
     bio: "Professional journey of Dikshant Dahiya. Bridging technical rigor in process safety engineering with high-fidelity ESG research and system audit standards.",
     linkedin: "https://www.linkedin.com/in/dikshant-dahiya-07aa83108/",
     github: "https://github.com/Dkshnt",
-    youtube: "https://www.youtube.com/@uncovrdminds"
+    youtube: "https://www.youtube.com/@uncovrdminds",
+    resumeURL: "/Dikshant_Dahiya_Resume.pdf"
   });
 
   const fetchPortfolio = async () => {
