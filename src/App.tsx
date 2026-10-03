@@ -21,7 +21,16 @@ export default function App() {
     youtube: "https://www.youtube.com/@uncovrdminds",
     resumeURL: "/Dikshant_Dahiya_Resume.pdf",
     photo: "/esg-sustainability-forest.jpg"
-  });
+    blocks: [
+      {
+        id: "block_2",
+        type: "image",
+        value: "/esg-sustainability-forest.jpg",
+        name: "High-Fidelity Assurance Audits",
+        sort_order: 20
+      }
+    ]
+});
 
   const fetchPortfolio = async () => {
     try {
