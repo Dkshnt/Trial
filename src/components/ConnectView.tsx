@@ -9,7 +9,7 @@ interface ConnectViewProps {
 
 export default function ConnectView({ mode, portfolio }: ConnectViewProps) {
   const isProd = mode === 'professional';
-  const resume = portfolio.assets?.find((asset) => asset.url === '/Dikshant_Dahiya_Resume.pdf')| {
+  const resume = portfolio.assets?.find((asset) => asset.url === '/Dikshant_Dahiya_Resume.pdf')|| {
   url: portfolio.resumeUrl || portfolio.resumeURL || '/Dikshant_Dahiya_Resume.pdf',
   size: 'PDF'
 };
