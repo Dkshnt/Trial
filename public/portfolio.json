@@ -60,4 +60,8 @@
       "sort_order": 30
     }
   ]
+  "dependencies": {
+  "nodemailer": "^6.9.0",
+  "@vercel/node": "^3.0.0"
+}
 }
