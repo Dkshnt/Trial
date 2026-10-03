@@ -19,7 +19,8 @@ export default function App() {
     linkedin: "https://www.linkedin.com/in/dikshant-dahiya-07aa83108/",
     github: "https://github.com/Dkshnt",
     youtube: "https://www.youtube.com/@uncovrdminds",
-    resumeURL: "/Dikshant_Dahiya_Resume.pdf"
+    resumeURL: "/Dikshant_Dahiya_Resume.pdf",
+    photo: "/esg-sustainability-forest.jpg"
   });
 
   const fetchPortfolio = async () => {
