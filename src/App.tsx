@@ -16,9 +16,9 @@ export default function App() {
   const [portfolio, setPortfolio] = useState<PortfolioData>({
     headline: "Engineering a Sustainable Future.",
     bio: "Professional journey of Dikshant Dahiya. Bridging technical rigor in process safety engineering with high-fidelity ESG research and system audit standards.",
-    linkedin: "https://linkedin.com",
-    github: "https://github.com",
-    youtube: "https://youtube.com"
+    linkedin: "https://www.linkedin.com/in/dikshant-dahiya-07aa83108/",
+    github: "https://github.com/Dkshnt",
+    youtube: "https://www.youtube.com/@uncovrdminds"
   });
 
   const fetchPortfolio = async () => {
