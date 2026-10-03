@@ -4,6 +4,7 @@
   "linkedin": "https://www.linkedin.com/in/dikshant-dahiya-07aa83108",
   "github": "https://github.com/Dkshnt",
   "youtube": "https://www.youtube.com/@uncovrdminds",
+  "resumeURL":"/DIkshant_Dahiya_Resume.pdf",
   "assets": [
     {
       "id": "Gemini_Generated_Image_xmrcjhxmrcjhxmrc_1790181170454_23589951.png",
@@ -48,7 +49,7 @@
     {
       "id": "block_2",
       "type": "image",
-      "value": "/uploads/esg-sustainability-forest.jpg",
+      "value": "/esg-sustainability-forest.jpg",
       "name": "High-Fidelity Assurance Audits",
       "sort_order": 20
     },
